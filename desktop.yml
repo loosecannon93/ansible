@@ -1,0 +1,6 @@
+---
+- hosts: desktops
+  user: cannonmatthews
+  sudo: yes
+  roles: 
+    - desktops
