@@ -1,0 +1,6 @@
+---
+- name: Install Webserver and Node.js
+  apt: pkg={{item}} state=installed
+  with_items: 
+        - nodejs
+        - nginx
