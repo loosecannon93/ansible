@@ -1,8 +1,8 @@
 [desktops]
-arya
+arya ansible_connection=local ansible_python_interpreter=python2
 
 [pi]
-#luna
+raspberrypi ansible_ssh_host=192.168.1.166 
 
 [vms]
 #petra
