@@ -1,0 +1,7 @@
+---
+- hosts: cersei
+  sudo: yes
+  roles: 
+    - common
+    - debian-common
+    - wiki
