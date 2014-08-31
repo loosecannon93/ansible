@@ -1,0 +1,8 @@
+---
+# Site wide playbook, should run everything
+# currently just applies common role. 
+#
+- hosts: all 
+  sudo: yes
+  roles: 
+    - common
