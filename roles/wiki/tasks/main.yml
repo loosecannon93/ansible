@@ -1,0 +1,72 @@
+---
+- name: Install Webserver and Node.js
+  apt: pkg={{item}} state=installed
+  with_items: 
+        - nodejs
+        - nginx
+        - supervisor
+- name: Set nodejs as alternative for node
+  alternatives: >
+        name=node 
+        link=/usr/bin/node
+        path=/usr/bin/nodejs
+- name: check to see if npm is installed
+  stat: path=/usr/bin/npm
+  register: npm
+- name: Install npm 
+  command: "curl -L https://npmjs.org/install.sh | sh"
+  when: not npm.stat.exists
+- name: Install TiddlyWiki Node app
+  npm: > 
+    name=tiddlywiki
+    state=present
+    global=yes
+# - name: install forever 
+#   npm: > 
+#     name=forever
+#     state=present
+#     global=yes
+- name: Check if Wiki Dir exists
+  stat: path=/srv/wiki
+  register: stat
+- name: Create wiki
+  command: tiddlywiki /srv/wiki --init server
+  when: not stat.stat.exists
+- name: Create wiki system user
+  user: > 
+     state=present
+     name=wiki
+     system=yes
+     home=/srv/wiki
+     createhome=no
+- name: chown /srv/wiki to wiki user
+  file: > 
+     state=directory
+     path=/srv/wiki
+     recurse=yes
+     owner=wiki group=wiki
+- name: Install Supervisord config file
+  copy: > 
+     src=supervisor.conf
+     dest=/etc/supervisor/conf.d/wiki.conf
+     owner=root group=root mode=0644
+  notify: reload supervisor
+  notify: start wiki
+- name: remove nginx default file
+  file: > 
+     state=absent
+     path=/etc/nginx/sites-enabled/default
+  notify: reload nginx
+- name: Install nginx config file 
+  copy: > 
+     src=nginx.conf
+     dest=/etc/nginx/sites-available/wiki
+     owner=root group=root mode=0644
+  notify: reload nginx
+- name: Enable Nginx Site
+  file: > 
+     state=link
+     src=/etc/nginx/sites-available/wiki
+     dest=/etc/nginx/sites-enabled/wiki
+  notify: reload nginx
+ 

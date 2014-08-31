@@ -1,4 +1,3 @@
 ---
 - include: apt.yml
-- include: wiki.yml
 
