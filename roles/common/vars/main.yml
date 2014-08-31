@@ -1,0 +1,6 @@
+packages: 
+  - vim
+  - wget
+  - curl
+  - htop
+  - tree
