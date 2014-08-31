@@ -1,3 +1,4 @@
 ---
-- name: restart vbr0
-  service: name=bridge@vbr0.service state=restarted
+- name: re-enable br0
+  command: netctl reenable br0
+#  service: name=bridge@vbr0.service state=restarted

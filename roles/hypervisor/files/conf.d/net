@@ -1,9 +1,0 @@
-config_eno1="null"
-dns_domain_eno1="cannonmatthews.com"
-
-# Bridge Config
-config_vbr0="dhcp"
-brctl br0="setfd 0
-sethello 10
-stp off"
-bridge_vbr0="eno1"

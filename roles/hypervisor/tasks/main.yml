@@ -15,14 +15,19 @@
   portage: > 
         package=net-misc/bridge-utils 
         state=emerged
-- name: Add Bridge Config to /etc/conf.d/net
+#- name: Add Bridge Config to /etc/conf.d/net
+#  copy: > 
+#        src=conf.d/net
+#        dest=/etc/conf.d/net
+#        owner=root group=root mode=0644
+- name: Create netctl profile for Bridge
   copy: > 
-        src=conf.d/net
-        dest=/etc/conf.d/net
-        owner=root group=root mode=0644
-- name: Create Systemd SErvice unit
-  copy: > 
-        src=bridge.service
-        dest='/etc/systemd/system/bridge@.service'
-        owner=root group=root mode=0644
-  notify: restart vbr0
+    src=br0.profile
+    dest=/etc/netctl/br0
+    owner=root group=root mode=0644
+  notify: re-enable br0
+#- name: Create Systemd SErvice unit
+#  copy: > 
+#        src=bridge.service
+#        dest='/etc/systemd/system/bridge@.service'
+#        owner=root group=root mode=0644
