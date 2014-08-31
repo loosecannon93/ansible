@@ -2,6 +2,8 @@
 - hosts: arya
   remote_user: root
   sudo: no
+  roles: 
+    - hypervisor
   tasks: 
     - name: Set /usr/bin/vim as default editor
       command: /usr/bin/eselect editor set /usr/bin/vim

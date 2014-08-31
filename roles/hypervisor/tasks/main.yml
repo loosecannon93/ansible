@@ -1,0 +1,28 @@
+---
+- name: Emerge app-emulation/qemu
+  portage: > 
+    package=app-emulation/qemu
+    state=present
+- name: Emerge app-emulation/libvirt
+  portage: > 
+    package=app-emulation/libvirt
+    state=emerged
+- name: Emerge app-emulation/virt-manager
+  portage: > 
+    package=app-emulation/virt-manager
+    state=emerged
+- name: Emerge bridge-utils
+  portage: > 
+        package=net-misc/bridge-utils 
+        state=emerged
+- name: Add Bridge Config to /etc/conf.d/net
+  copy: > 
+        src=conf.d/net
+        dest=/etc/conf.d/net
+        owner=root group=root mode=0644
+- name: Create Systemd SErvice unit
+  copy: > 
+        src=bridge.service
+        dest='/etc/systemd/system/bridge@.service'
+        owner=root group=root mode=0644
+  notify: restart vbr0

@@ -1,0 +1,3 @@
+---
+- name: restart vbr0
+  service: name=bridge@vbr0.service state=restarted

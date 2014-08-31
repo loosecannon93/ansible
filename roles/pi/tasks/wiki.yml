@@ -3,4 +3,11 @@
   apt: pkg={{item}} state=installed
   with_items: 
         - nodejs
+        - npm
         - nginx
+- name: Install TiddlyWiki Node app
+  npm: > 
+        name=tiddlywiki
+        state=present
+        global=yes
+ 
