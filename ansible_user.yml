@@ -1,0 +1,29 @@
+---
+# Playbook to create a remote management user, and give them sudo 
+- hosts: all
+  remote_user: root
+  tasks: 
+    - name: create Ansible Management user
+      user: > 
+        name=ansible
+        createhome=yes
+        home=/var/lib/ansible
+        system=yes
+        state=present
+    - name: Install Authorized key file
+      authorized_key: > 
+        user=ansible
+        state=present
+        key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDITq47JHMEhP4gLR5p8WuAEWFmZeqGGk+iBZ5jkT17M5p56M/MUJmNUG8wzjjk3YAG6CKqq2t0hpnp+sq6ruGXbbgYeWOFEFOJzdkku/zNRTgMUjN0gz0tXgicEu/TQPCnrIv1uRgRLNo/MFAq8Ff3HWtKsmUluySI9NYD5ag7I00oV9N48UUv51KRP9TOXVVAW+eacUcYMCvgv2QFTUYWAwwJw2QeBRmOJt4eiZ3ycQMpLzj+Ytzlh8Wx9SZRNFEa0qq715+IJG1qdZff0zSjbGQjzz4h7IO2ITXZRlamwDnmC6PJFjPU75HHo+Z/QQE9fSdzFXnTQcTm9HCZWuef cannonmatthews@arya"
+    - name: install sudo 
+      apt: name=sudo state=installed
+      when: ansible_pkg_mgr == 'apt'
+    - name: Give Sudo access to user
+      lineinfile: >
+        dest=/etc/sudoers 
+        state=present 
+        regexp='^%ansible' 
+        line='%ansible ALL=(root) NOPASSWD:ALL' 
+        validate='visudo -cf %s'
+
+
