@@ -1,0 +1,81 @@
+version 6.0
+if &cp | set nocp | endif
+let s:cpo_save=&cpo
+set cpo&vim
+imap <silent> <Plug>IMAP_JumpBack =IMAP_Jumpfunc('b', 0)
+imap <silent> <Plug>IMAP_JumpForward =IMAP_Jumpfunc('', 0)
+vmap <NL> <Plug>IMAP_JumpForward
+nmap <NL> <Plug>IMAP_JumpForward
+nmap gx <Plug>NetrwBrowseX
+nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
+vmap <silent> <Plug>IMAP_JumpBack `<i=IMAP_Jumpfunc('b', 0)
+vmap <silent> <Plug>IMAP_JumpForward i=IMAP_Jumpfunc('', 0)
+vmap <silent> <Plug>IMAP_DeleteAndJumpBack "_<Del>i=IMAP_Jumpfunc('b', 0)
+vmap <silent> <Plug>IMAP_DeleteAndJumpForward "_<Del>i=IMAP_Jumpfunc('', 0)
+nmap <silent> <Plug>IMAP_JumpBack i=IMAP_Jumpfunc('b', 0)
+nmap <silent> <Plug>IMAP_JumpForward i=IMAP_Jumpfunc('', 0)
+imap <NL> <Plug>IMAP_JumpForward
+let &cpo=s:cpo_save
+unlet s:cpo_save
+set backspace=indent,eol,start
+set fileencodings=ucs-bom,utf-8,latin1
+set guicursor=n-v-c:block,o:hor50,i-ci:hor15,r-cr:hor30,sm:block,a:blinkon0
+set helplang=en
+set history=50
+set hlsearch
+set ruler
+set viminfo='20,\"50
+set nu
+set mouse=a
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set autoindent
+set modeline
+syntax on
+let @w='gg:set formatoptions-=croOkki-- W. Cannon Matthews III -- CMSC 16100-- Exercise :r! date "+\%D"-- :set formatoptions+=crokA'
+let @h='gg:set formatoptions-=crookki# W. Cannon Matthews III # CMSC 16200# Exercise :r! date "+\%D"# :set formatoptions+=crokA'
+let @c='i#include <stdifkbo.h>#include <stdlib.h> int main(int argc, char **argv) { argkbkbkbexit(0); }kkDkbkkkkkkkkO//%kbkbjjjjjji A       qkbkbkbkbi'
+
+set foldmethod=manual
+set foldnestmax=1
+set foldlevelstart=0
+let c_fold=1 " fold C files
+
+set autochdir
+set tags=tags; 
+
+
+
+" vim latex things 
+" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+filetype plugin on
+
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: This enables automatic indentation as you type.
+filetype indent on
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_UseMakefile = 0
+let g:Tex_CompileRule_pdf = 'make `basename $* .tex`'
+
+
+set t_Co=265
+colorscheme slate
+
+
+"match ErrorMsg '\%>80v.\+'
+" vim: set ft=vim :

@@ -1,6 +1,9 @@
 [desktops]
 arya ansible_connection=local ansible_python_interpreter=python2
 
+[laptops]
+jane ansible_connection=local
+
 [pi]
 raspberrypi ansible_ssh_host=192.168.1.166 
 
