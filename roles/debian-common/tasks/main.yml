@@ -1,4 +1,0 @@
-- name: add debian backports
-  apt_repository: >
-        repo='deb http://debian.uchicago.edu/debian wheezy-backports main'
-        state=present

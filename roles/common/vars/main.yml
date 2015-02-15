@@ -1,6 +1,13 @@
+# packages to install as a base on all hosts
 packages: 
   - vim
   - wget
   - curl
   - htop
   - tree
+  - git 
+  - svn 
+  - git-svn
+  - subversion  
+
+

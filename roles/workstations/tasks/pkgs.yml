@@ -1,0 +1,14 @@
+---
+- name: Install APT Packages
+  apt: name={{item}} state=installed
+  when: ansible_pkg_mgr == 'apt'
+  with_items: packages
+- name: Install YUM packages 
+  yum: name={{item}} state=installed
+  when: ansible_pkg_mgr == 'yum' 
+  with_items: packages
+- name: Install Portage Packages
+  portage: name={{item}} state=installed
+  when: ansible_pkg_mgr == 'portage' 
+  with_items: packages
+        

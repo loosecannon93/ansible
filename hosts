@@ -1,7 +1,8 @@
 [desktops]
 arya ansible_connection=local ansible_python_interpreter=python2
 
-[laptops]
+[workstations]
+ygritte.lan.cannonmatthews.com 
 jane ansible_connection=local
 
 [pi]

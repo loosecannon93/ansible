@@ -1,0 +1,10 @@
+- name: Install vimrc to cannonmatthews
+  copy: > 
+    src=vimrc 
+    dest=/home/cannonmatthews/.vimrc
+    owner=cannnonmatthews group=cannonmatthews mode=644
+- name: Install vimrc to root 
+  copy: > 
+    src=vimrc 
+    dest=/root/.vimrc
+    owner=root group=root mode=644

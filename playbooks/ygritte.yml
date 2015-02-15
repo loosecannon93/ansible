@@ -1,0 +1,6 @@
+---
+- hosts: jane
+  sudo: yes
+  roles: 
+    - common
+    - workstations

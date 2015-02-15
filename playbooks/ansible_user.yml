@@ -1,7 +1,7 @@
 ---
 # Playbook to create a remote management user, and give them sudo 
 - hosts: all
-  remote_user: root
+  remote_user: cannonmatthews
   tasks: 
     - name: create Ansible Management user
       user: > 
@@ -14,8 +14,11 @@
       authorized_key: > 
         user=ansible
         state=present
-        key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDITq47JHMEhP4gLR5p8WuAEWFmZeqGGk+iBZ5jkT17M5p56M/MUJmNUG8wzjjk3YAG6CKqq2t0hpnp+sq6ruGXbbgYeWOFEFOJzdkku/zNRTgMUjN0gz0tXgicEu/TQPCnrIv1uRgRLNo/MFAq8Ff3HWtKsmUluySI9NYD5ag7I00oV9N48UUv51KRP9TOXVVAW+eacUcYMCvgv2QFTUYWAwwJw2QeBRmOJt4eiZ3ycQMpLzj+Ytzlh8Wx9SZRNFEa0qq715+IJG1qdZff0zSjbGQjzz4h7IO2ITXZRlamwDnmC6PJFjPU75HHo+Z/QQE9fSdzFXnTQcTm9HCZWuef cannonmatthews@arya"
-    - name: install sudo 
+        key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBmUlltF9czCzO2iaOu5mEirig3wg5S4yFHPoEDxeEE54g3md2S+NqJzbro4XxzPSeQTrBgN7SyF0spU3ES7PNTV1DpIsBqUU9aX++yX5Uoi8l1u9ynMZ4GeN6TPdp+GyP9ebEFblYOZR8QQW/5tF9Jm1DizqRcQGgVmkE4Yvr8X2eAhRNL5yuNbfsyE7TqGhZprMx74dcCw8JqNyn9tvfGVZ65q//+hGEbmskphvbo+rqxkzTQMpgMpa73qpv3kQrd4RJy8zKJOe8EJQsxYUcaDF06FcHR6+qfMMbH1dHZ2gWrMqtuFtASeiYoMIVrg+PJU6bFU7dJjuTL4KFv/vF cannonmatthews@jane.lan.cannonmatthews.com" 
+    - name: install sudo (yum) 
+      yum: name=sudo state=installed
+      when: ansible_pkg_mgr == 'yum'
+    - name: install sudo (apt) 
       apt: name=sudo state=installed
       when: ansible_pkg_mgr == 'apt'
     - name: Give Sudo access to user
