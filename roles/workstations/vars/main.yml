@@ -1,6 +1,5 @@
-- packages: 
-    - texlive
-    - awesome 
-    - vlc
-    - texlive
-    - vim-latex
+packages: 
+  - texlive
+  - awesome 
+  - texlive
+  - vim-latex

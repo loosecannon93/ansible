@@ -2,6 +2,7 @@
 # Playbook to create a remote management user, and give them sudo 
 - hosts: all
   remote_user: cannonmatthews
+  sudo: yes
   tasks: 
     - name: create Ansible Management user
       user: > 

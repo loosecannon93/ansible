@@ -1,3 +1,6 @@
 ---
-- include: jane.yml
-- include: ygritte.yml
+- hosts: workstations
+  sudo: yes
+  roles: 
+    - common
+    - workstations

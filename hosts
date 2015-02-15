@@ -3,7 +3,7 @@ arya ansible_connection=local ansible_python_interpreter=python2
 
 [workstations]
 ygritte.lan.cannonmatthews.com 
-jane ansible_connection=local
+jane.lan.cannonmatthews.com #ansible_connection=local
 
 [pi]
 raspberrypi ansible_ssh_host=192.168.1.166 
