@@ -2,7 +2,7 @@
   copy: > 
     src=vimrc 
     dest=/home/cannonmatthews/.vimrc
-    owner=cannnonmatthews group=cannonmatthews mode=644
+    owner=cannonmatthews group=cannonmatthews mode=644
 - name: Install vimrc to root 
   copy: > 
     src=vimrc 
